@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="حاسبة الكروت">
+	<meta name="author" content="Khalid Dhafir">
+    <title>حاسبة الكروت</title>
+
+	<!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+
+<body style="padding-top: 60px;">
+<!--Navbar Start-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">حاسبة الكروت</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="index.html">الحاسبة</a></li>
+        <li><a href="settings.html">الإعدادات</a></li>
+        <li><a href="about.html">عن البرنامج</a></li>
+      </ul>
+      <!--<ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul> -->
+    </div>
+  </div>
+</nav> 
+<!-- Navbar Ends-->
+    <div class="container">
+	<div class="row">
+		<div class="col-sm-12 text-center">
+
+<form class="" id="cardsform">
+    <div id="formcontent">
+			<!-- Content generated here -->
+		</div>
+		<button class="btn btn-primary col-sm-10" type="button" onclick="sumcards();"> احسب </button>
+    <button class="btn btn-danger col-sm-2" type="reset"> مسح </button>
+</form>
+<br><br>
+<div>مجموع المبلغ = <div id="totalmony"></div><br></div>
+<div>عدد الكروت المباعة = <div id="totalcards"></div></div>
+
+        </div>
+        </div>
+    </div>
+</body>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+for (var i = 0; i < localStorage.length; i++){
+	var row = "<div class=\"form-group\"><label class=\"control-label\" for=\"cardcount" + i + "\">" + localStorage.key(i) + "</label><input class=\"form-control inputTab\" type=\"number\" id=\"cardcount" + i + "\"><input type=\"hidden\" id=\"cardprice" + i + "\" value=\"" + localStorage.getItem(localStorage.key(i)) + "\"></div>";
+	$('#formcontent').append(row);
+}
+	document.getElementById("cardcount0").focus();
+//doing the math 
+function sumcards(){
+	var grandtotal = 0;
+  var totalcards = 0;
+	var cardcount = 0;
+	var cardprice = 0;
+	var subtotl = 0;
+	var cardcountid;
+	var cardpriceid;
+	for (var i = 0; i < localStorage.length; i++){
+		cardcountid = "cardcount"+i;
+		cardpriceid = "cardprice"+i;
+		cardcount = parseInt(document.getElementById(cardcountid).value);
+    cardprice = parseInt(document.getElementById(cardpriceid).value);
+    if (!isNaN(cardcount)){
+      subtotl = cardcount * cardprice;
+			grandtotal = grandtotal + subtotl;
+			totalcards = totalcards + cardcount;
+    }
+	}              
+  document.getElementById("totalcards").innerHTML = totalcards;
+  document.getElementById("totalmony").innerHTML = addCommas(grandtotal);
+}
+
+
+    $(".inputTab").keyup(function (event) {
+    if (event.keyCode == 13) {
+        textboxes = $("input.form-control");
+        currentBoxNumber = textboxes.index(this);
+        if (textboxes[currentBoxNumber + 1] != null) {
+            nextBox = textboxes[currentBoxNumber + 1];
+            nextBox.focus();
+            nextBox.select();
+        }
+        event.preventDefault();
+        return false;
+    }
+});
+/*
+// register jQuery extension
+jQuery.extend(jQuery.expr[':'], {
+    focusable: function (el, index, selector) {
+        return $(el).is('a, button, :input, [tabindex]');
+    }
+});
+
+// Moving between fields using ENTER key 
+$(document).on('keypress', 'input,select', function (e) {
+    if (e.which == 13) {
+        e.preventDefault();
+        // Get all focusable elements on the page
+        var $canfocus = $(':focusable');
+        var index = $canfocus.index(document.activeElement) + 1;
+        if (index >= $canfocus.length) index = 0;
+        $canfocus.eq(index).focus();
+    }
+});
+*/
+</script>
+<script src="js/code.js"></script>
+</html>
