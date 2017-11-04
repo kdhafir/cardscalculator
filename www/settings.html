@@ -14,35 +14,12 @@
 </head>
 
 <body style="padding-top: 60px;">
-<!--Navbar Start-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">حاسبة الكروت</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="index.html">الحاسبة</a></li>
-        <li class="active"><a href="settings.html">الإعدادات</a></li>
-        <li><a href="about.html">عن البرنامج</a></li>
-      </ul>
-      <!--<ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul> -->
-    </div>
-  </div>
-</nav> 
-<!-- Navbar Ends-->
+<div id="AppHeader"></div>
+
     <div class="container">
 	<div class="row">
 		<div class="col-sm-12 text-center">
-            <p>تعديل وإضافة فئات الكروت:</p>
+            <p><b>الإعدادات:</b>: تعديل وإضافة الكروت</p>
             <form class="">
     <div class="form-group">
         <label class="control-label" for="cardname"> تسمية الكرت </label>
@@ -52,37 +29,48 @@
         <label class="control-label" for="cardprice"> سعر الكرت </label>
         <input class="form-control" type="number" id="cardprice">
     </div>
-        <button class="btn btn-primary col-sm-10" type="button" onclick="savecardtodb();"> إضافة فئة </button>
+        <button class="btn btn-primary" type="button" onclick="savecardtodb();"> إضافة فئة </button>
 </form>
 						<table class="table" id="cardstable"></table>
         </div>
     </div>
     </div>
 
-</body>
-
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/code.js"></script>
 <script>
-//
-document.getElementById("cardname").focus();
 function savecardtodb(){
+	var cprice = parseInt(document.getElementById("cardprice").value);
   var cname = document.getElementById("cardname").value;
-  var cprice = parseInt(document.getElementById("cardprice").value);
-  localStorage.setItem(cname, cprice);
+  localStorage.setItem(cprice, cname);
 	document.getElementById("cardname").value = "";
 	document.getElementById("cardprice").value = "";
-		window.location.reload();
+	window.location.reload();
 }
 function deletecard(keyname){
 		localStorage.removeItem(keyname);
 		window.location.reload();
 }
 // Loop through localStorage
+	var cardpriceArray = new Array([]);
 for (var i = 0; i < localStorage.length; i++){
-	var row = "<tr><td>" + localStorage.key(i) + "</td><td>" + localStorage.getItem(localStorage.key(i)) + "</td><td><button type='button' onclick='deletecard(\"" + localStorage.key(i) + "\");'> حذف </button></td></tr>";
-	$('#cardstable').append(row);
-}
+		cardpriceArray[i] = localStorage.key(i);
+	}
+	cp_array = cardpriceArray.sort(function(a,b){return a - b});// a.sort(function(a,b){return a - b})
+	cp_array = cardpriceArray.reverse();
+	for (var i = 0; i < localStorage.length; i++){
+		//var row = "<div class=\"form-group\"><label class=\"control-label\" for=\"cardcount" + i + "\">" + localStorage.key(i) + "</label><input class=\"form-control inputTab\" type=\"number\" id=\"cardcount" + i + "\"><input type=\"hidden\" id=\"cardprice" + i + "\" value=\"" + localStorage.getItem(localStorage.key(i)) + "\"></div>";
+		var row = "<tr><td>" + localStorage.getItem(cp_array[i]) + "</td><td>" + cp_array[i] + "</td><td><button type='button' onclick='deletecard(\"" + cp_array[i] + "\");'> حذف </button></td></tr>";
+		$('#cardstable').append(row);
+	}
+
+document.getElementById("cardname").focus();
 </script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $('#AppHeader').load('header.html',function(){});
+});
+</script>
+</body>
 </html>
