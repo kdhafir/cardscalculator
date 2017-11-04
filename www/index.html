@@ -14,31 +14,9 @@
 </head>
 
 <body style="padding-top: 60px;">
-<!--Navbar Start-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">حاسبة الكروت</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="index.html">الحاسبة</a></li>
-        <li><a href="settings.html">الإعدادات</a></li>
-        <li><a href="about.html">عن البرنامج</a></li>
-      </ul>
-      <!--<ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul> -->
-    </div>
-  </div>
-</nav> 
-<!-- Navbar Ends-->
+
+<div id="AppHeader"></div>
+
     <div class="container">
 	<div class="row">
 		<div class="col-sm-12 text-center">
@@ -47,8 +25,6 @@
     <div id="formcontent">
 			<!-- Content generated here -->
 		</div>
-		<button class="btn btn-primary col-sm-10" type="button" onclick="sumcards();"> احسب </button>
-    <button class="btn btn-danger col-sm-2" type="reset"> مسح </button>
 </form>
 <br><br>
 <div>مجموع المبلغ = <div id="totalmony"></div><br></div>
@@ -63,11 +39,27 @@
 <script src="js/bootstrap.min.js"></script>
 
 <script>
-for (var i = 0; i < localStorage.length; i++){
-	var row = "<div class=\"form-group\"><label class=\"control-label\" for=\"cardcount" + i + "\">" + localStorage.key(i) + "</label><input class=\"form-control inputTab\" type=\"number\" id=\"cardcount" + i + "\"><input type=\"hidden\" id=\"cardprice" + i + "\" value=\"" + localStorage.getItem(localStorage.key(i)) + "\"></div>";
-	$('#formcontent').append(row);
-}
+if (localStorage.length > 0){
+	var cardpriceArray = new Array([]);
+	for (var i = 0; i < localStorage.length; i++){
+		cardpriceArray[i] = localStorage.key(i);
+	}
+	cp_array = cardpriceArray.sort(function(a,b){return a - b});// a.sort(function(a,b){return a - b})
+	cp_array = cardpriceArray.reverse();
+	for (var i = 0; i < localStorage.length; i++){
+		//var row = "<div class=\"form-group\"><label class=\"control-label\" for=\"cardcount" + i + "\">" + localStorage.key(i) + "</label><input class=\"form-control inputTab\" type=\"number\" id=\"cardcount" + i + "\"><input type=\"hidden\" id=\"cardprice" + i + "\" value=\"" + localStorage.getItem(localStorage.key(i)) + "\"></div>";
+		var row = "<div class=\"form-group\"><label class=\"control-label\" for=\"cardcount" + i + "\">" + localStorage.getItem(cp_array[i]) + "</label><input class=\"form-control inputTab\" type=\"number\" id=\"cardcount" + i + "\"><input type=\"hidden\" id=\"cardprice" + i + "\" value=\"" + cp_array[i] + "\"></div>";
+		$('#formcontent').append(row);
+	}
+	$('#formcontent').append("<button class=\"btn btn-primary col-sm-10\" type=\"button\" onclick=\"sumcards();\"> احسب </button>");
+	$('#formcontent').append("<button class=\"btn btn-danger col-sm-2\" type=\"reset\"> مسح </button>");
+	
 	document.getElementById("cardcount0").focus();
+}else{
+	var startmsg = "<div class=\"alert alert-warning\">"+"أضف مجموعة من فئات الكروت وأسعارها في شاشة " + "<br><a href=\"settings.html\" class=\"btn btn-default\"> الإعدادات </a>" + "</dive>";
+	$('#formcontent').append(startmsg);
+}
+
 //doing the math 
 function sumcards(){
 	var grandtotal = 0;
@@ -93,19 +85,22 @@ function sumcards(){
 }
 
 
-    $(".inputTab").keyup(function (event) {
-    if (event.keyCode == 13) {
-        textboxes = $("input.form-control");
-        currentBoxNumber = textboxes.index(this);
-        if (textboxes[currentBoxNumber + 1] != null) {
-            nextBox = textboxes[currentBoxNumber + 1];
-            nextBox.focus();
-            nextBox.select();
-        }
-        event.preventDefault();
-        return false;
-    }
+$(".inputTab").keyup(function (event) {
+if (event.keyCode == 13) {
+		textboxes = $("input.form-control");
+		currentBoxNumber = textboxes.index(this);
+		if (textboxes[currentBoxNumber + 1] !== null) {
+				nextBox = textboxes[currentBoxNumber + 1];
+				nextBox.focus();
+				nextBox.select();
+		}
+		event.preventDefault();
+		return false;
+}
 });
+
+
+
 /*
 // register jQuery extension
 jQuery.extend(jQuery.expr[':'], {
@@ -126,6 +121,11 @@ $(document).on('keypress', 'input,select', function (e) {
     }
 });
 */
+</script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $('#AppHeader').load('header.html',function(){});
+});
 </script>
 <script src="js/code.js"></script>
 </html>
