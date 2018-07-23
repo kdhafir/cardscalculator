@@ -69,6 +69,7 @@
       <div class="modal-footer">
 				
 		<a class="btn btn-primary" id="sendwhatsappbtn" href="" data-action="share/whatsapp/share">ارسال بالواتس</a>
+		<button id="sharebtn" onclick="">ارسال</button>
 		<a class="btn btn-info" id="copybtn" data-clipboard-target="#summarybody"> نسخ </a>
 		<button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
          <!--<button type="button" class="btn btn-primary">Save changes</button>-->
@@ -146,6 +147,8 @@ function whatsgen(){
 	msgtext = msgtext + "*اجمالي مبلغ الكروت* " + document.getElementById("totalmony").innerHTML + "\n";
 	//https://api.whatsapp.com/send?phone=whatsappphonenumber&text=
 	//document.getElementById("sendwhatsappbtn").href = "https://api.whatsapp.com/send?phone=whatsappphonenumber&text=" + encodeURIComponent(msgtext);
+	document.getElementById("sharebtn").setAttribute("onclick", "window.plugins.socialsharing.share('"+ msgtext +"')");
+	//document.getElementById("sharebtn").onclick = "window.plugins.socialsharing.share('"+ msgtext +"')";
 	document.getElementById("sendwhatsappbtn").href = "whatsapp://send?text=" + encodeURIComponent(msgtext);
 	document.getElementById("summarybody").innerHTML = msgtext;
 	$("#summaryModal").modal();
@@ -190,10 +193,10 @@ $(document).on('keypress', 'input,select', function (e) {
 <script src="js/code.js"></script>
 <script src="js/clipboard.min.js"></script>
 <script>
-new Clipboard('.btn');
+	new Clipboard('.btn');
 function setFocusTo(objname) {
-var x = objname;
-document.getElementById(x).focus();
+    var x = objname;
+    document.getElementById(x).focus();
 }
 </script>
 
