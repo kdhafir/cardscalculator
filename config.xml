@@ -8,6 +8,7 @@
 <preference name="android-build-tool" value="gradle" />
 <platform name="android" >
     <access origin="*"/>
+    <access origin="whatsapp:*" launch-external="yes" />
 </platform>
 <preference name="phonegap-version" value="cli-6.2.0" />
 <preference name="xwalkMultipleApk" value="false" />
