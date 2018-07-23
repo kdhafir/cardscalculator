@@ -13,7 +13,7 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>  
 </head>
 
-<body style="padding-top: 60px;">
+<body style="padding-top: 60px;" onload="domLoaded()">
 <!--Navbar Start-->
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
@@ -82,8 +82,11 @@
 <script src="js/bootstrap.min.js"></script>
 
 <script>
-	document.addEventListener("deviceready", onDeviceReady, false);
-
+//document.addEventListener("deviceready", onDeviceReady, false);
+function domLoaded(){
+  document.addEventListener("deviceready", onDeviceReady, false);
+ 
+}
 function onDeviceReady() {
     // Now safe to use device APIs
 }
@@ -199,9 +202,9 @@ $(document).on('keypress', 'input,select', function (e) {
 <script src="js/clipboard.min.js"></script>
 <script>
 	new Clipboard('.btn');
-function setFocusTo(objname) {
-    var x = objname;
-    document.getElementById(x).focus();
+	function setFocusTo(objname) {
+  var x = objname;
+  document.getElementById(x).focus();
 }
 </script>
 
