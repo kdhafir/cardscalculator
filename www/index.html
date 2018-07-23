@@ -61,13 +61,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title" id="myModalLabel">الالتزام ببرنامج الأنجاز:</h4>
+        <h4 class="modal-title" id="myModalLabel">الملخص:</h4>
       </div>
       <div class="modal-body" id="summarybody">
-				hi
+				
 			</div>
       <div class="modal-footer">
-    <a class="btn btn-primary" id="sendwhatsappbtn" href="">ارسال بالواتس</a>
+				
+    <a class="btn btn-primary" id="sendwhatsappbtn" href="" data-action="share/whatsapp/share">ارسال بالواتس</a>
 		<button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
          <!--<button type="button" class="btn btn-primary">Save changes</button>-->
       </div>
@@ -142,7 +143,9 @@ function whatsgen(){
 	$('#summarybody').append("<hr>");
 	msgtext = msgtext + "*اجمالي عدد الكروت* " + document.getElementById("totalcards").innerHTML + "<br>\n\r";
 	msgtext = msgtext + "*اجمالي مبلغ الكروت* " + document.getElementById("totalmony").innerHTML + "<br>\n\r";
-	document.getElementById("sendwhatsappbtn").href = "whatsapp://send?text=\"" + encodeURIComponent(msgtext) + "\" data-action=\"share/whatsapp/share";
+	//https://api.whatsapp.com/send?phone=whatsappphonenumber&text=
+	//document.getElementById("sendwhatsappbtn").href = "https://api.whatsapp.com/send?phone=whatsappphonenumber&text=" + encodeURIComponent(msgtext);
+	document.getElementById("sendwhatsappbtn").href = "whatsapp://send?text=" + encodeURIComponent(msgtext);
 	document.getElementById("summarybody").innerHTML = msgtext;
 	$("#summaryModal").modal();
 //alert(msgtext);
