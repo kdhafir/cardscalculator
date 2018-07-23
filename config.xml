@@ -9,6 +9,7 @@
 <platform name="android" >
     <access origin="*"/>
     <access origin="whatsapp:*" launch-external="yes" />
+    <allow-intent href="whatsapp:*" />
 </platform>
 <preference name="phonegap-version" value="cli-6.2.0" />
 <preference name="xwalkMultipleApk" value="false" />
