@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta name="description" content="حاسبة الكروت">
-	<meta name="author" content="Khalid Dhafir">
+	<meta name="author" content="Khalid Dhafir 2018">
     <title>حاسبة الكروت</title>
 
 	<!-- Bootstrap Core CSS -->
@@ -14,9 +14,31 @@
 </head>
 
 <body style="padding-top: 60px;">
-
-<div id="AppHeader"></div>
-
+<!--Navbar Start-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">حاسبة الكروت</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="index.html">الحاسبة</a></li>
+        <li><a href="settings.html">الإعدادات</a></li>
+        <li><a href="about.html">عن البرنامج</a></li>
+      </ul>
+      <!--<ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul> -->
+    </div>
+  </div>
+</nav> 
+<!-- Navbar Ends-->
     <div class="container">
 	<div class="row">
 		<div class="col-sm-12 text-center">
@@ -33,7 +55,28 @@
         </div>
         </div>
     </div>
-</body>
+<!--Modal Section-->
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#summaryModal">عرض</button>
+
+<div class="modal fade in" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><!--style="display: block; padding-right: 10px;"-->
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">الالتزام ببرنامج الأنجاز:</h4>
+      </div>
+      <div class="modal-body" id="summarybody">
+				hi
+			</div>
+      <div class="modal-footer">
+    <a class="btn btn-primary" id="sendwhatsappbtn" href="">ارسال بالواتس</a>
+		<button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+         <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal End-->
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -44,19 +87,21 @@ if (localStorage.length > 0){
 	for (var i = 0; i < localStorage.length; i++){
 		cardpriceArray[i] = localStorage.key(i);
 	}
-	cp_array = cardpriceArray.sort(function(a,b){return a - b});// a.sort(function(a,b){return a - b})
-	cp_array = cardpriceArray.reverse();
+	cp_array = cardpriceArray.sort();
+	//cp_array = cardpriceArray.reverse();
 	for (var i = 0; i < localStorage.length; i++){
 		//var row = "<div class=\"form-group\"><label class=\"control-label\" for=\"cardcount" + i + "\">" + localStorage.key(i) + "</label><input class=\"form-control inputTab\" type=\"number\" id=\"cardcount" + i + "\"><input type=\"hidden\" id=\"cardprice" + i + "\" value=\"" + localStorage.getItem(localStorage.key(i)) + "\"></div>";
-		var row = "<div class=\"form-group\"><label class=\"control-label\" for=\"cardcount" + i + "\">" + localStorage.getItem(cp_array[i]) + "</label><input class=\"form-control inputTab\" type=\"number\" id=\"cardcount" + i + "\"><input type=\"hidden\" id=\"cardprice" + i + "\" value=\"" + cp_array[i] + "\"></div>";
+		var row = "<div class=\"form-group\"><label class=\"control-label\" id=\"cardlabel"+ i +"\" for=\"cardcount" + i + "\">" + localStorage.getItem(cp_array[i]) + "</label><input class=\"form-control inputTab\" type=\"number\" id=\"cardcount" + i + "\"><input type=\"hidden\" id=\"cardprice" + i + "\" value=\"" + cp_array[i] + "\"></div>";
 		$('#formcontent').append(row);
 	}
 	$('#formcontent').append("<button class=\"btn btn-primary col-sm-10\" type=\"button\" onclick=\"sumcards();\"> احسب </button>");
 	$('#formcontent').append("<button class=\"btn btn-danger col-sm-2\" type=\"reset\"> مسح </button>");
+	//$('#formcontent').append("<a class=\"btn\" href=\"https://api.whatsapp.com/send?phone=whatsappphonenumber&text=" + encodeURIComponent(urlencodedtext) + "\">ارسل</a>");
+	$('#formcontent').append("<a class=\"btn btn-success\" id=\"whatsappbtn\" href=\"#\" onclick=\"whatsgen()\">الملخص</a>");
 	
 	document.getElementById("cardcount0").focus();
 }else{
-	var startmsg = "<div class=\"alert alert-warning\">"+"أضف مجموعة من فئات الكروت وأسعارها في شاشة " + "<br><a href=\"settings.html\" class=\"btn btn-default\"> الإعدادات </a>" + "</dive>";
+	var startmsg = "أضف مجموعة من فئات الكروت وأسعارها في شاشة " + "<br><a href=\"settings.html\" class=\"btn btn-default\"> الإعدادات </a>";
 	$('#formcontent').append(startmsg);
 }
 
@@ -82,6 +127,27 @@ function sumcards(){
 	}              
   document.getElementById("totalcards").innerHTML = totalcards;
   document.getElementById("totalmony").innerHTML = addCommas(grandtotal);
+	document.getElementById("whatsappbtn").disabled = false;
+}
+
+function whatsgen(){
+	//var urlencodedtext;
+	//var link = "whatsapp://send?text=" + encodeURIComponent(urlencodedtext) + "\" data-action=\"share/whatsapp/share";
+	var msgtext = "";
+	for (var i = 0; i < localStorage.length; i++){
+		var cardtobuy = document.getElementById("cardcount" + i).value;
+		if(cardtobuy > 0){
+			var msgtext = msgtext + cardtobuy + " ";
+			var msgtext = msgtext + document.getElementById("cardlabel" + i).innerHTML+ "<br>\n\r";
+		}
+	}
+	$('#summarybody').append("<hr>");
+	msgtext = msgtext + "*اجمالي عدد الكروت* " + document.getElementById("totalcards").innerHTML + "<br>\n\r";
+	msgtext = msgtext + "*اجمالي مبلغ الكروت* " + document.getElementById("totalmony").innerHTML + "<br>\n\r";
+	document.getElementById("sendwhatsappbtn").href = "whatsapp://send?text=" + encodeURIComponent(msgtext) + "\" data-action=\"share/whatsapp/share";
+	document.getElementById("summarybody").innerHTML = msgtext;
+	$("#summaryModal").modal();
+//alert(msgtext);
 }
 
 
@@ -98,9 +164,6 @@ if (event.keyCode == 13) {
 		return false;
 }
 });
-
-
-
 /*
 // register jQuery extension
 jQuery.extend(jQuery.expr[':'], {
@@ -122,10 +185,7 @@ $(document).on('keypress', 'input,select', function (e) {
 });
 */
 </script>
-<script type="text/javascript">
-$(document).ready(function(e) {
-    $('#AppHeader').load('header.html',function(){});
-});
-</script>
 <script src="js/code.js"></script>
+
+</body>
 </html>
