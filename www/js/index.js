@@ -49,7 +49,7 @@ function whatsgen(){
 
 // Share to Whatsapp , telegram ... etc 
 function sharefun(){
-    var sharedmsg = document.getElementById("summarybody").innerHTML;
+    var sharedmsg = "Hi I'm Khalid";//document.getElementById("summarybody").innerHTML;
     // this is the complete list of currently supported params you can pass to the plugin (all optional)
     var options = {
     message: sharedmsg, // not supported on some apps (Facebook, Instagram)
