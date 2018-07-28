@@ -42,7 +42,7 @@ function whatsgen(){
 	msgtext = msgtext + "*اجمالي عدد الكروت* " + document.getElementById("totalcards").innerHTML + "\r\n";
 	msgtext = msgtext + "*اجمالي مبلغ الكروت* " + document.getElementById("totalmony").innerHTML + "\r\n";
     document.getElementById("summarybody").innerHTML = msgtext;
-    document.getElementById("sharebtn").setAttribute("onclick", "sharefun()");//\""+ msgtext +"\"
+    //document.getElementById("sharebtn").setAttribute("onclick", "sharefun()");//\""+ msgtext +"\"
 	
 	$("#summaryModal").modal();
 }
