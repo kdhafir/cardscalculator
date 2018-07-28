@@ -49,7 +49,9 @@ function whatsgen(){
 
 // Share to Whatsapp , telegram ... etc 
 function sharefun(){
-    var sharedmsg = document.getElementById("summarybody").innerHTML;
+	var sharedmsg = document.getElementById("summarybody").innerHTML;
+	window.plugins.socialsharing.share(sharedmsg);
+	/*
     // this is the complete list of currently supported params you can pass to the plugin (all optional)
     var options = {
     message: sharedmsg, // not supported on some apps (Facebook, Instagram)
@@ -70,6 +72,7 @@ function sharefun(){
   };
   
   window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+  */
 }
 // Formating Numbers by adding commas
 function addCommas(nStr)
