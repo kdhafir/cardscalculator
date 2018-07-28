@@ -51,29 +51,8 @@ function whatsgen(){
 function sharefun(){
 	var sharedmsg = document.getElementById("summarybody").innerHTML;
 	window.plugins.socialsharing.share(sharedmsg);
-	/*
-    // this is the complete list of currently supported params you can pass to the plugin (all optional)
-    var options = {
-    message: sharedmsg, // not supported on some apps (Facebook, Instagram)
-    subject: 'فاتورة كروت', // fi. for email
-    files: ['', ''], // an array of filenames either locally or remotely
-    url: '',
-    chooserTitle: 'اختر تطبيق لارسال الفاتورة', // Android only, you can override the default share sheet title, //
-    appPackageName: '' // Android only, you can provide id of the App you want to share with
-    };
-  
-    var onSuccess = function(result) {
-    console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
-    console.log("Shared to app: " + result.app); // On Android result.app since plugin version 5.4.0 this is no longer empty. On iOS it's empty when sharing is cancelled (result.completed=false)
-    };
-  
-  var onError = function(msg) {
-    console.log("Sharing failed with message: " + msg);
-  };
-  
-  window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
-  */
 }
+
 // Formating Numbers by adding commas
 function addCommas(nStr)
 {
