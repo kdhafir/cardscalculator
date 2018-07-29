@@ -5,102 +5,102 @@
 -->
 <html dir="rtl">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
-    <!-- Good default declaration:
-    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-        * Enable inline JS: add 'unsafe-inline' to default-src
-        * Enable eval(): add 'unsafe-eval' to default-src
-    * Create your own at http://cspisawesome.com
-    -->
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+        <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+        <!-- Good default declaration:
+        * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+        * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+        * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+            * Enable inline JS: add 'unsafe-inline' to default-src
+            * Enable eval(): add 'unsafe-eval' to default-src
+        * Create your own at http://cspisawesome.com
+        -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <title>حاسبة الكروت</title>
-</head>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <title>حاسبة الكروت</title>
+    </head>
 
-<body style="padding-top: 60px;">
-<!--Navbar Start-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">حاسبة الكروت</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="index.html">الحاسبة</a></li>
-        <li><a href="settings.html">الإعدادات</a></li>
-        <li><a href="about.html">عن البرنامج</a></li>
-      </ul>
-    </div>
-  </div>
-</nav> 
-<!-- Navbar Ends-->
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 text-center">
-    
-    <form class="" id="cardsform">
-        <div id="formcontent">
-            <!-- Content generated here -->
-        </div>
-    </form>
-    <br><br>
-    <div>مجموع المبلغ = <div id="totalmony"></div><br></div>
-    <div>عدد الكروت المباعة = <div id="totalcards"></div></div>
-            </div>
-    </div>
-</div>
-    <!--Modal Section-->
-    <div class="modal fade in" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><!--style="display: block; padding-right: 10px;"-->
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            <h4 class="modal-title" id="myModalLabel">الملخص:</h4>
-          </div>
-          <div class="modal-body" >
-                    <pre id="summarybody"></pre>
+    <body style="padding-top: 60px;">
+        <!--Navbar Start-->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">حاسبة الكروت</a>
                 </div>
-          <div class="modal-footer">
-                    
-            <button class="btn btn-primary" id="sharebtn" onclick="sharefun()">ارسال</button> 
-            <a class="btn btn-info" id="copybtn" data-clipboard-target="#summarybody"> نسخ </a>
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">إغلاق</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Modal End-->
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="index.html">الحاسبة</a></li>
+                        <li><a href="settings.html">الإعدادات</a></li>
+                        <li><a href="about.html">عن البرنامج</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+        <!-- Navbar Ends-->
 
-    <script type="text/javascript" src="cordova.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/clipboard.min.js"></script>
-    <script>
-	    new Clipboard('.btn');
-	    function setFocusTo(objname) {
-            var x = objname;
-            document.getElementById(x).focus();
-        }
-    </script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-        app.initialize();
-    </script>
-</body>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+
+                    <form class="" id="cardsform">
+                        <div id="formcontent">
+                            <!-- Content generated here -->
+                        </div>
+                    </form>
+                    <br><br>
+                    <div>مجموع المبلغ = <div id="totalmony"></div><br></div>
+                    <div>عدد الكروت المباعة = <div id="totalcards"></div></div>
+                </div>
+            </div>
+        </div>
+        <!--Modal Section-->
+        <div class="modal fade in" id="summaryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"><!--style="display: block; padding-right: 10px;"-->
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close pull-left" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">الملخص:</h4>
+                    </div>
+                    <div class="modal-body" >
+                        <pre id="summarybody"></pre>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button class="btn btn-primary" id="sharebtn" onclick="sharefun()">ارسال</button> 
+                        <a class="btn btn-info" id="copybtn" data-clipboard-target="#summarybody"> نسخ </a>
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">إغلاق</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal End-->
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/clipboard.min.js"></script>
+        <script>
+                    new Clipboard('.btn');
+                    function setFocusTo(objname) {
+                        var x = objname;
+                        document.getElementById(x).focus();
+                    }
+        </script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+                    app.initialize();
+        </script>
+    </body>
 
 </html>
